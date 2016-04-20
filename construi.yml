@@ -7,7 +7,6 @@ environment:
   - DOCKER_PUSH_EMAIL=levi.stephen@gmail.com
   - DOCKER_PUSH_USERNAME
   - DOCKER_PUSH_PASSWORD
-  - LYNIS_VERSION=2.2.0
 
 volumes:
   - /var/run/docker.sock:/var/run/docker.sock
@@ -15,7 +14,7 @@ volumes:
 targets:
   versiune:
     image: lstephen/versiune:8
-    run: -t "$version.$LYNIS_VERSION" VERSION
+    run: VERSION
 
   build:
     before:
