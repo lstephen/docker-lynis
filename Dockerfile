@@ -1,7 +1,7 @@
 FROM alpine:3.3
 MAINTAINER Levi Stephen <levi.stephen@gmail.com>
 
-RUN apk --update add bash curl
+RUN apk --update add bash curl openssl
 
 ENV LYNIS_VERSION 2.2.0
 
