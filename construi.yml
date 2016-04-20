@@ -1,0 +1,31 @@
+image: lstephen/docker-push:9
+
+default: build
+
+environment:
+  - DOCKER_PUSH_NAME=lstephen/lynis
+  - DOCKER_PUSH_EMAIL=levi.stephen@gmail.com
+  - DOCKER_PUSH_USERNAME
+  - DOCKER_PUSH_PASSWORD
+  - LYNIS_VERSION=2.2.0
+
+volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+
+targets:
+  versiune:
+    image: lstephen/versiune:8
+    run: -t "$version.$LYNIS_VERSION" VERSION
+
+  build:
+    before:
+      - versiune
+    run: build
+
+  release:
+    before:
+      - versiune
+    volumes:
+      - $GIT_SSH_KEY:/ssh/id_rsa
+    run: build release
+
